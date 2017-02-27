@@ -1,23 +1,42 @@
 import java.util.Iterator;
 
-/** LinkedList */
+/** Singly-LinkedList implemntation of List.
+ * 
+ * @author	Clyde-Bazile
+ * @since 	2017-02-27
+ */
 
 public class LinkedList<E> implements Iterable<E>
 {
 
+	/** Constructs an empty list. */
 	public LinkedList() { 
 		// TODO 
 	}
 
+	/** Constructs a list contaning the elements of the specified collection
+	  * in the order they are returned by the collection's iterator.
+	  */
 	public LinkedList(Collections<? extends E> c) {
 		// TODO
 	}
 
-	public E search(E item) { 
+	/**
+	  * Returns the element at the specified index in the list.
+	  *
+	  * @param 	e	the element to be returned
+	  * @return the element at the specified index in the list or null
+	  */
+	public E search(E e) { 
 		// TODO 
 	}
 
-	public void insert(E item) {
+	/**
+	  * Inserts the specified element at the front of the list.
+	  * 
+	  * @param e	the element to be inserted
+	  */
+	public void insert(E e) {
 		// TODO
 	}
 
