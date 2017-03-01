@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.Collection;
 
 /** Doubly-LinkedList.
  * 
@@ -27,6 +28,7 @@ public final class LinkedList<E> implements Iterable<E>
 		@Override
 		public String toString() {
 			// TODO
+			return null;
 		}
 	}
 
@@ -38,7 +40,7 @@ public final class LinkedList<E> implements Iterable<E>
 	/** Constructs a list contaning the elements of the specified collection
 	  * in the order they are returned by the collection's iterator.
 	  */
-	public LinkedList(final Collections<? extends E> c) {
+	public LinkedList(final Collection<? extends E> c) {
 		// TODO
 	}
 
@@ -49,7 +51,8 @@ public final class LinkedList<E> implements Iterable<E>
 	  * @return the element at the specified index in the list or null
 	  */
 	public E search(final E e) { 
-		// TODO 
+		// TODO
+		return null; 
 	}
 
 	/**
@@ -88,6 +91,7 @@ public final class LinkedList<E> implements Iterable<E>
 	 */
 	public int size() {
 		// TODO
+		return 0;
 	}
 	
 	/** 
@@ -97,6 +101,7 @@ public final class LinkedList<E> implements Iterable<E>
 	 */
 	public boolean isEmpty() {
 		// TODO
+		return false;
 	}
 	
 	/** 
@@ -152,12 +157,18 @@ public final class LinkedList<E> implements Iterable<E>
 	@Override
 	public String toString() {
 		// TODO
+		return null;
+	}
+
+	@Override
+	public Iterator<E> iterator(){
+		return new ListIterator<E>();
 	}
 
 	/**
 	  * {@inheritDoc}
 	  */
-	private final class ListIterator implements Iterator<E>
+	private final class ListIterator<E> implements Iterator<E>
 	{
 
 		private int cursor;
@@ -165,16 +176,19 @@ public final class LinkedList<E> implements Iterable<E>
 
 		public ListIterator() {
 			// TODO
+			end = 0;
 		}
 
 		@Override
 		public boolean hasNext() {
 			// TODO
+			return false;
 		}
 
 		@Override
-		public Integer next() {
+		public E next() {
 			// TODO
+			return null;
 		}
 
 		@Override
