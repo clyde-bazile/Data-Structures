@@ -1,5 +1,6 @@
 import java.util.Iterator;
 import java.util.Collection;
+import java.util.ArrayList;
 
 /** Circular, doubly linked list with sentinel whose next always points
  *  to head and whose previous always points to tail.
@@ -60,10 +61,9 @@ public final class LinkedList<E> implements Iterable<E>
 	  * @param e	the element to be inserted
 	  */
 	public void insert(final E e) {
-		Node<E> newNode = new Node<>(e, null, sentinel.next);
+		Node<E> newNode = new Node<>(e, sentinel, sentinel.next);
 		sentinel.next.prev = newNode;
 		sentinel.next = newNode;
-		newNode.prev = sentinel;
 		++size;
 	}
 
@@ -83,8 +83,13 @@ public final class LinkedList<E> implements Iterable<E>
 	 * @param e		element whose presence in this list is to be tested
 	 * @return	true if this list contains the specified element; false otherwise
 	 */
-	public void contains(final E e) {
-		// TODO
+	public boolean contains(final E e) {
+		for (Node<E> current = sentinel.next; current != sentinel; current = current.next) {
+			if (current.key == e) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/** 
@@ -111,7 +116,10 @@ public final class LinkedList<E> implements Iterable<E>
 	 * @param e 	the elmenet to add
 	 */
 	public void append(final E e) {
-		// TODO
+		Node<E> newNode = new Node<>(e, sentinel.prev, sentinel);
+		sentinel.prev.next = newNode;
+		sentinel.prev = newNode;
+		++size;
 	}
 
 	/** 
@@ -122,7 +130,9 @@ public final class LinkedList<E> implements Iterable<E>
 	 * @param c 	the collection to append to this list
 	 */
 	public void addAll(final Collection<? extends E> c) {
-		// TODO
+		for (E key : c) {
+			append(key);
+		}
 	}
 
 	/** 
@@ -194,18 +204,18 @@ public final class LinkedList<E> implements Iterable<E>
 	}
 
 	public static void main(String[] args) {
-		LinkedList<Integer> list = new LinkedList<>();
+		Collection<Integer> collection = new ArrayList<>();
+		collection.add(1);		
+		collection.add(2);		
+		collection.add(3);		
+		collection.add(4);		
+
+		LinkedList<Integer> list = new LinkedList<>(collection);
 		System.out.println(list);
 		System.out.println(list.size());
 
-
-		list.insert(1);
-		list.insert(2);
-		list.insert(3);
-		list.insert(4);
-
-		System.out.println(list);
-		System.out.println(list.size());
+		System.out.println(list.contains(3));
+		System.out.println(list.contains(6));
 
 	}
 }
