@@ -1,29 +1,32 @@
 import java.util.Iterator;
 
-/** Singly-LinkedList implemntation of List.
+/** Doubly-LinkedList.
  * 
  * @author	Clyde-Bazile
  * @since 	2017-02-27
  */
 
-public class LinkedList<E> implements Iterable<E>
+public final class LinkedList<E> implements Iterable<E>
 {
 
-
-	private static class Node<E> 
+	/** Doubly-LinkedList Node */
+	private final class Node<E> 
 	{
 		private final E data;
-		private final Node<E> next;
+		private Node<E> next;
+		private Node<E> prev;
 
-		Node() 
-		{ this(null, null); }
-
-		Node(E data)
+		Node(final E data)
 		{ this(data, null); }
 
-		Node(E data, Node<E> next) {
+		Node(final E data, final Node<E> next) {
 			this.data = data;
 			this.next = next;
+		}
+
+		@Override
+		public String toString() {
+			// TODO
 		}
 	}
 
@@ -35,7 +38,7 @@ public class LinkedList<E> implements Iterable<E>
 	/** Constructs a list contaning the elements of the specified collection
 	  * in the order they are returned by the collection's iterator.
 	  */
-	public LinkedList(Collections<? extends E> c) {
+	public LinkedList(final Collections<? extends E> c) {
 		// TODO
 	}
 
@@ -45,7 +48,7 @@ public class LinkedList<E> implements Iterable<E>
 	  * @param 	e	the element to be returned
 	  * @return the element at the specified index in the list or null
 	  */
-	public E search(E e) { 
+	public E search(final E e) { 
 		// TODO 
 	}
 
@@ -54,7 +57,7 @@ public class LinkedList<E> implements Iterable<E>
 	  * 
 	  * @param e	the element to be inserted
 	  */
-	public void insert(E e) {
+	public void insert(final E e) {
 		// TODO
 	}
 
@@ -64,7 +67,7 @@ public class LinkedList<E> implements Iterable<E>
 	  *
 	  * @param e	the element to be deleted
 	  */
-	public void delete(E e) {
+	public void delete(final E e) {
 		// TODO
 	}
 
@@ -74,7 +77,7 @@ public class LinkedList<E> implements Iterable<E>
 	 * @param e		element whose presence in this list is to be tested
 	 * @return	true if this list contains the specified element; false otherwise
 	 */
-	public void contains(E e) {
+	public void contains(final E e) {
 		// TODO
 	}
 
@@ -101,7 +104,7 @@ public class LinkedList<E> implements Iterable<E>
 	 * 
 	 * @param e 	the element to add
 	 */
-	public void addFirst(E e) {
+	public void addFirst(final E e) {
 		// TODO
 	}
 
@@ -110,7 +113,7 @@ public class LinkedList<E> implements Iterable<E>
 	 *
 	 * @param e 	the elmenet to add
 	 */
-	public void addLast(E e) {
+	public void addLast(final E e) {
 		// TODO
 	}
 
@@ -121,7 +124,7 @@ public class LinkedList<E> implements Iterable<E>
 	 *
 	 * @param c 	the collection to append to this list
 	 */
-	public void addAll(Collection<? extends E> c) {
+	public void addAll(final Collection<? extends E> c) {
 		// TODO
 	}
 
@@ -154,7 +157,7 @@ public class LinkedList<E> implements Iterable<E>
 	/**
 	  * {@inheritDoc}
 	  */
-	private static final class ListIterator implements Iterator<E>
+	private final class ListIterator implements Iterator<E>
 	{
 
 		private int cursor;
