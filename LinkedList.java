@@ -1,7 +1,8 @@
 import java.util.Iterator;
 import java.util.Collection;
 
-/** Doubly-LinkedList.
+/** Circular, doubly linked list with sentinel whose next always points
+ *  to head and whose previous always points to tail.
  * 
  * @author	Clyde-Bazile
  * @since 	2017-02-27
@@ -9,50 +10,48 @@ import java.util.Collection;
 
 public final class LinkedList<E> implements Iterable<E>
 {
+	private int size = 0;
+	private Node<E> sentinel = new Node<>();
 
 	/** Doubly-LinkedList Node */
 	private final class Node<E> 
 	{
-		private final E data;
+		private final E key;
 		private Node<E> next;
 		private Node<E> prev;
 
-		Node(final E data)
-		{ this(data, null); }
+		Node(){
+			this(null, null, null);
+		}
 
-		Node(final E data, final Node<E> next) {
-			this.data = data;
+		Node(E key){
+			this(key, null, null);
+		}
+
+		Node(E key, Node<E> prev, Node<E> next){
+			this.key = key;
+			this.prev = prev;
 			this.next = next;
 		}
 
 		@Override
 		public String toString() {
-			// TODO
-			return null;
+			return String.format("[ %s ]", key);
 		}
 	}
 
 	/** Constructs an empty list. */
-	public LinkedList() { 
-		// TODO 
+	public LinkedList() {
+		sentinel.next = sentinel;
+		sentinel.prev = sentinel;
 	}
 
 	/** Constructs a list contaning the elements of the specified collection
 	  * in the order they are returned by the collection's iterator.
 	  */
 	public LinkedList(final Collection<? extends E> c) {
-		// TODO
-	}
-
-	/**
-	  * Returns the element at the specified index in the list.
-	  *
-	  * @param 	e	the element to be returned
-	  * @return the element at the specified index in the list or null
-	  */
-	public E search(final E e) { 
-		// TODO
-		return null; 
+		this();
+		addAll(c);
 	}
 
 	/**
@@ -61,7 +60,11 @@ public final class LinkedList<E> implements Iterable<E>
 	  * @param e	the element to be inserted
 	  */
 	public void insert(final E e) {
-		// TODO
+		Node<E> newNode = new Node<>(e, null, sentinel.next);
+		sentinel.next.prev = newNode;
+		sentinel.next = newNode;
+		newNode.prev = sentinel;
+		++size;
 	}
 
 	/**
@@ -89,9 +92,8 @@ public final class LinkedList<E> implements Iterable<E>
 	 *
 	 * @return the number of elements in this list
 	 */
-	public int size() {
-		// TODO
-		return 0;
+	public int size() { 
+		return size; 
 	}
 	
 	/** 
@@ -100,17 +102,7 @@ public final class LinkedList<E> implements Iterable<E>
 	 * @return true if this list contains no elements; false otherwise
 	 */
 	public boolean isEmpty() {
-		// TODO
-		return false;
-	}
-	
-	/** 
-	 * Inserts the specified element at the beginning of this list.
-	 * 
-	 * @param e 	the element to add
-	 */
-	public void addFirst(final E e) {
-		// TODO
+		return size() == 0;
 	}
 
 	/** 
@@ -118,7 +110,7 @@ public final class LinkedList<E> implements Iterable<E>
 	 *
 	 * @param e 	the elmenet to add
 	 */
-	public void addLast(final E e) {
+	public void append(final E e) {
 		// TODO
 	}
 
@@ -156,8 +148,12 @@ public final class LinkedList<E> implements Iterable<E>
 	 */
 	@Override
 	public String toString() {
-		// TODO
-		return null;
+		StringBuilder list = new StringBuilder();
+		for (Node<E> current = sentinel.next; current != sentinel; current = current.next){
+			list.append(String.format("%s->", current));
+		}
+		list.append("NIL");
+		return list.toString();
 	}
 
 	@Override
@@ -195,5 +191,21 @@ public final class LinkedList<E> implements Iterable<E>
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}
+	}
+
+	public static void main(String[] args) {
+		LinkedList<Integer> list = new LinkedList<>();
+		System.out.println(list);
+		System.out.println(list.size());
+
+
+		list.insert(1);
+		list.insert(2);
+		list.insert(3);
+		list.insert(4);
+
+		System.out.println(list);
+		System.out.println(list.size());
+
 	}
 }
