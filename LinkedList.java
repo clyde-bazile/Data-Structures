@@ -2,13 +2,13 @@ import java.util.Iterator;
 import java.util.Collection;
 import java.util.ArrayList;
 
-/** Circular, doubly linked list with sentinel whose next always points
- *  to head and whose previous always points to tail.
- * 
- * @author	Clyde-Bazile
- * @since 	2017-02-27
- */
-
+/** 
+  * Circular, doubly linked list with sentinel whose next always points
+  * to head and whose previous always points to tail.
+  * 
+  * @author	Clyde-Bazile
+  * @since 	2017-02-27
+  */
 public final class LinkedList<E> implements Iterable<E>
 {
 	private int size = 0;
@@ -74,7 +74,20 @@ public final class LinkedList<E> implements Iterable<E>
 	  * @param e	the element to be deleted
 	  */
 	public void delete(final E e) {
-		// TODO
+		for (Node<E> current = sentinel.next; current != sentinel; current = current.next) {
+			if (current.key == e) {
+				delete(current);
+			}
+		}
+	}
+
+	/** Deletes the specified Node */
+	private void delete(Node<E> e) {
+		e.prev.next = e.next;
+		e.next.prev = e.prev;
+		if (size > 0) {
+			--size;
+		}
 	}
 
 	/** 
@@ -140,8 +153,10 @@ public final class LinkedList<E> implements Iterable<E>
 	 *
 	 * @return the first element in this list
 	 */
-	public void deleteFirst() {
-		// TODO
+	public Node<E> deleteFirst() {
+		Node<E> head = sentinel.next;
+		delete(head);
+		return head;
 	}
 
 	/** 
@@ -149,8 +164,10 @@ public final class LinkedList<E> implements Iterable<E>
 	 *
 	 * @return the last element in this list
 	 */
-	public void deleteLast() {
-		// TODO
+	public Node<E> deleteLast() {
+		Node<E> tail = sentinel.prev;
+		delete(tail);
+		return tail;
 	}
 
 	/** 
@@ -162,7 +179,6 @@ public final class LinkedList<E> implements Iterable<E>
 		for (Node<E> current = sentinel.next; current != sentinel; current = current.next){
 			list.append(String.format("%s->", current));
 		}
-		list.append("NIL");
 		return list.toString();
 	}
 
@@ -214,8 +230,42 @@ public final class LinkedList<E> implements Iterable<E>
 		System.out.println(list);
 		System.out.println(list.size());
 
-		System.out.println(list.contains(3));
-		System.out.println(list.contains(6));
+		System.out.println(list.deleteFirst());
+		System.out.println(list.deleteFirst());
+		System.out.println(list.deleteFirst());
+		System.out.println(list.deleteFirst());
+
+		System.out.println(list);
+		System.out.println(list.size());	
+	
+		System.out.println(list.deleteFirst());
+
+		System.out.println(list);
+		System.out.println(list.size());
+
+		System.out.println(list.deleteFirst());
+
+		System.out.println(list);
+		System.out.println(list.size());
+
+		list.append(1);		
+
+		System.out.println(list);
+		System.out.println(list.size());
+
+
+		list.append(1);		
+		list.append(2);		
+		list.append(3);		
+		list.append(4);		
+
+		System.out.println(list);
+		System.out.println(list.size());	
+
+		System.out.println(list.deleteFirst());
+
+		System.out.println(list);
+		System.out.println(list.size());
 
 	}
 }
