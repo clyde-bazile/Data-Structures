@@ -1,6 +1,8 @@
 import java.util.Iterator;
 import java.util.Collection;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Collections;
 
 /** 
   * Circular, doubly linked list with sentinel whose next always points
@@ -184,33 +186,34 @@ public final class LinkedList<E> implements Iterable<E>
 
 	@Override
 	public Iterator<E> iterator(){
-		return new ListIterator<E>();
+		if (isEmpty()) {
+			return Collections.<E>emptyList().iterator();
+		}
+		return new ListIterator();
 	}
 
 	/**
 	  * {@inheritDoc}
 	  */
-	private final class ListIterator<E> implements Iterator<E>
+	private final class ListIterator implements Iterator<E>
 	{
-
-		private int cursor;
-		private final int end;
-
-		public ListIterator() {
-			// TODO
-			end = 0;
-		}
+		private Node<E> cursor = sentinel.next;
+		private final Node<E> end = sentinel.prev;
 
 		@Override
 		public boolean hasNext() {
-			// TODO
-			return false;
+			return cursor != sentinel;
 		}
 
 		@Override
 		public E next() {
-			// TODO
-			return null;
+			if(hasNext()){
+				Node<E> currentNode = cursor;
+				cursor = cursor.next;
+				return currentNode.key;
+			} else {
+				throw new NoSuchElementException();
+			}
 		}
 
 		@Override
@@ -228,44 +231,30 @@ public final class LinkedList<E> implements Iterable<E>
 
 		LinkedList<Integer> list = new LinkedList<>(collection);
 		System.out.println(list);
-		System.out.println(list.size());
 
-		System.out.println(list.deleteFirst());
-		System.out.println(list.deleteFirst());
-		System.out.println(list.deleteFirst());
-		System.out.println(list.deleteFirst());
+		for (Integer i : list) {
+			System.out.println(i);
+		}
 
+		list.deleteFirst();
+		list.deleteLast();
+
+		System.out.println();
 		System.out.println(list);
-		System.out.println(list.size());	
-	
-		System.out.println(list.deleteFirst());
 
+		for (Integer i : list) {
+			System.out.println(i);
+		}
+
+		list.insert(17);
+
+		System.out.println();
 		System.out.println(list);
-		System.out.println(list.size());
 
-		System.out.println(list.deleteFirst());
+		for (Integer i : list) {
+			System.out.println(i);
+		}
 
-		System.out.println(list);
-		System.out.println(list.size());
-
-		list.append(1);		
-
-		System.out.println(list);
-		System.out.println(list.size());
-
-
-		list.append(1);		
-		list.append(2);		
-		list.append(3);		
-		list.append(4);		
-
-		System.out.println(list);
-		System.out.println(list.size());	
-
-		System.out.println(list.deleteFirst());
-
-		System.out.println(list);
-		System.out.println(list.size());
 
 	}
 }
