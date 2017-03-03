@@ -154,10 +154,10 @@ public final class LinkedList<E> implements Iterable<E>
 	 *
 	 * @return the first element in this list
 	 */
-	public Node<E> deleteFirst() {
+	public E deleteFirst() {
 		Node<E> head = sentinel.next;
 		delete(head);
-		return head;
+		return head.key;
 	}
 
 	/** 
@@ -165,10 +165,10 @@ public final class LinkedList<E> implements Iterable<E>
 	 *
 	 * @return the last element in this list
 	 */
-	public Node<E> deleteLast() {
+	public E deleteLast() {
 		Node<E> tail = sentinel.prev;
 		delete(tail);
-		return tail;
+		return tail.key;
 	}
 
 	/** Finds and returns the first ocurrence of the node containing the specifed element */
