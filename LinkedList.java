@@ -1,9 +1,7 @@
 import java.util.Iterator;
 import java.util.Collection;
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Collections;
-import java.lang.instrument.Instrumentation;
 
 /** 
   * Circular, doubly linked list with sentinel whose next always points
@@ -28,19 +26,10 @@ public final class LinkedList<E> implements Iterable<E>
 			this(null, null, null);
 		}
 
-		Node(E key){
-			this(key, null, null);
-		}
-
 		Node(E key, Node<E> prev, Node<E> next){
 			this.key = key;
 			this.prev = prev;
 			this.next = next;
-		}
-
-		@Override
-		public String toString() {
-			return String.format("[ %s ]", key);
 		}
 	}
 
@@ -78,28 +67,6 @@ public final class LinkedList<E> implements Iterable<E>
 	public void delete(final E e) {
 		Node<E> nodeFound = search(e);
 		delete(nodeFound);
-	}
-
-	/** Finds and returns the first ocurrence of the node containing the specifed element */
-	private Node<E> search(final E e) {
-		for (Node<E> current = sentinel.next; current != sentinel; current = current.next) {
-			if (current.key == e) {
-				return current;
-			}
-		}
-		return null;
-	}
-
-	/** Deletes the specified Node */
-	private void delete(Node<E> e) {
-		try {
-			e.prev.next = e.next;
-			e.next.prev = e.prev;
-			if (size > 0) {
-				--size;
-			}
-		} catch (NullPointerException expected) {
-		}
 	}
 
 	/** 
@@ -183,14 +150,36 @@ public final class LinkedList<E> implements Iterable<E>
 		return tail;
 	}
 
+	/** Finds and returns the first ocurrence of the node containing the specifed element */
+	private Node<E> search(final E e) {
+		for (Node<E> current = sentinel.next; current != sentinel; current = current.next) {
+			if (current.key == e) {
+				return current;
+			}
+		}
+		return null;
+	}
+
+	/** Deletes the specified Node */
+	private void delete(Node<E> e) {
+		try {
+			e.prev.next = e.next;
+			e.next.prev = e.prev;
+			if (size > 0) {
+				--size;
+			}
+		} catch (NullPointerException expected) {
+		}
+	}
+
 	/** 
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toString() {
 		StringBuilder list = new StringBuilder();
-		for (Node<E> current = sentinel.next; current != sentinel; current = current.next){
-			list.append(String.format("%s->", current));
+		for (E current : this){
+			list.append(String.format("[ %s ]->", current));
 		}
 		return list.toString();
 	}
@@ -209,11 +198,11 @@ public final class LinkedList<E> implements Iterable<E>
 	private final class ListIterator implements Iterator<E>
 	{
 		private Node<E> cursor = sentinel.next;
-		private final Node<E> end = sentinel.prev;
+		private final Node<E> end = sentinel;
 
 		@Override
 		public boolean hasNext() {
-			return cursor != sentinel;
+			return cursor != end;
 		}
 
 		@Override
@@ -231,31 +220,5 @@ public final class LinkedList<E> implements Iterable<E>
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}
-	}
-
-	public static void main(String[] args) {
-		Collection<Integer> collection = new ArrayList<>();
-		collection.add(1);		
-		collection.add(2);		
-		collection.add(3);		
-		collection.add(4);		
-		collection.add(5);		
-		collection.add(6);		
-		collection.add(7);		
-
-		LinkedList<Integer> list = new LinkedList<>(collection);
-		System.out.println(list);
-
-		System.out.println(list.contains(2));
-
-		list.clear();
-
-		System.out.println(list);
-		System.out.println(list.size());
-
-		
-		
-
-
 	}
 }
