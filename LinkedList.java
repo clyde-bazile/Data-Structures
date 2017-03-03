@@ -115,6 +115,24 @@ public final class LinkedList<E> implements Iterable<E>
 		++size;
 	}
 
+	/**
+	  * Returns the first element in this list.
+	  *
+	  * @return 	the first element in the list
+	  */
+	 public E getFirst() {
+	  	return sentinel.next.key;
+	 }
+
+	/**
+	  * Returns the last element in this list.
+	  *
+	  * @return 	the last element in the list
+	  */
+	 public E getLast() {
+	  	return sentinel.prev.key;
+	 }
+
 	/** 
 	 * Appends all elements in the specified collection to the end of this
 	 * list, in the order the elements are returned from the specified 
