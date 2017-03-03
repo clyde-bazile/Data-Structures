@@ -96,7 +96,10 @@ public final class LinkedList<E> implements Iterable<E>
 	public boolean isEmpty() {
 		return size() == 0;
 	}
-
+	
+	/**
+	  * Removes all of the elements from this list.
+	  */
 	public void clear() {
 		sentinel.next = sentinel;
 		sentinel.prev = sentinel;
