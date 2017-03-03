@@ -3,6 +3,7 @@ import java.util.Collection;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Collections;
+import java.lang.instrument.Instrumentation;
 
 /** 
   * Circular, doubly linked list with sentinel whose next always points
@@ -13,7 +14,7 @@ import java.util.Collections;
   */
 public final class LinkedList<E> implements Iterable<E>
 {
-	private int size = 0;
+	private int size;
 	private Node<E> sentinel = new Node<>();
 
 	/** Doubly-LinkedList Node */
@@ -45,8 +46,7 @@ public final class LinkedList<E> implements Iterable<E>
 
 	/** Constructs an empty list. */
 	public LinkedList() {
-		sentinel.next = sentinel;
-		sentinel.prev = sentinel;
+		clear();
 	}
 
 	/** Constructs a list contaning the elements of the specified collection
@@ -76,19 +76,29 @@ public final class LinkedList<E> implements Iterable<E>
 	  * @param e	the element to be deleted
 	  */
 	public void delete(final E e) {
+		Node<E> nodeFound = search(e);
+		delete(nodeFound);
+	}
+
+	/** Finds and returns the first ocurrence of the node containing the specifed element */
+	private Node<E> search(final E e) {
 		for (Node<E> current = sentinel.next; current != sentinel; current = current.next) {
 			if (current.key == e) {
-				delete(current);
+				return current;
 			}
 		}
+		return null;
 	}
 
 	/** Deletes the specified Node */
 	private void delete(Node<E> e) {
-		e.prev.next = e.next;
-		e.next.prev = e.prev;
-		if (size > 0) {
-			--size;
+		try {
+			e.prev.next = e.next;
+			e.next.prev = e.prev;
+			if (size > 0) {
+				--size;
+			}
+		} catch (NullPointerException expected) {
 		}
 	}
 
@@ -99,12 +109,7 @@ public final class LinkedList<E> implements Iterable<E>
 	 * @return	true if this list contains the specified element; false otherwise
 	 */
 	public boolean contains(final E e) {
-		for (Node<E> current = sentinel.next; current != sentinel; current = current.next) {
-			if (current.key == e) {
-				return true;
-			}
-		}
-		return false;
+		return search(e) != null;
 	}
 
 	/** 
@@ -123,6 +128,12 @@ public final class LinkedList<E> implements Iterable<E>
 	 */
 	public boolean isEmpty() {
 		return size() == 0;
+	}
+
+	public void clear() {
+		sentinel.next = sentinel;
+		sentinel.prev = sentinel;
+		size = 0;
 	}
 
 	/** 
@@ -228,32 +239,22 @@ public final class LinkedList<E> implements Iterable<E>
 		collection.add(2);		
 		collection.add(3);		
 		collection.add(4);		
+		collection.add(5);		
+		collection.add(6);		
+		collection.add(7);		
 
 		LinkedList<Integer> list = new LinkedList<>(collection);
 		System.out.println(list);
 
-		for (Integer i : list) {
-			System.out.println(i);
-		}
+		System.out.println(list.contains(2));
 
-		list.deleteFirst();
-		list.deleteLast();
+		list.clear();
 
-		System.out.println();
 		System.out.println(list);
+		System.out.println(list.size());
 
-		for (Integer i : list) {
-			System.out.println(i);
-		}
-
-		list.insert(17);
-
-		System.out.println();
-		System.out.println(list);
-
-		for (Integer i : list) {
-			System.out.println(i);
-		}
+		
+		
 
 
 	}
