@@ -80,45 +80,4 @@ public final class Queue<E> {
 		}
 		return list.toString();
 	}
-
-	public static void main(String[] args) {
-		Queue<Integer> q = new Queue<>();
-
-		q.enqueue(1);
-		q.enqueue(2);
-		q.enqueue(3);
-		q.enqueue(4);
-
-		System.out.println(q);
-
-		System.out.println(q.deqeue());
-		System.out.println(q.deqeue());
-
-		System.out.println(q);
-		System.out.println(q.peek());
-		System.out.println(q.size());
-
-		q.clear();
-
-		System.out.println(q.peek());
-		System.out.println(q.size());
-		System.out.println(q);
-
-		q.enqueue(1);
-
-		System.out.println(q.peek());
-		System.out.println(q.size());
-		System.out.println(q);
-
-		System.out.println(q.deqeue());
-		System.out.println(q.deqeue());
-		System.out.println(q.deqeue());
-		System.out.println(q.deqeue());
-
-		System.out.println(q.peek());
-		System.out.println(q.size());
-		System.out.println(q);
-
-	}
-
 }
