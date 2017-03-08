@@ -20,7 +20,7 @@ public final class Queue<E> {
 	  * @param item 	the item to enqueue into this queue
 	  */
 	public void enqueue(final E item) {
-		// TODO
+		queue.append(item);
 	}
 
 	/** 
@@ -30,8 +30,7 @@ public final class Queue<E> {
 	  * @return the object at the front of this queue
 	  */
 	public E deqeue() {
-		// TODO
-		return null;
+		return queue.deleteFirst();
 	}
 
 	/**
@@ -41,8 +40,7 @@ public final class Queue<E> {
 	  * @return the object at the front of this queue
 	  */
 	public E peek() {
-		// TODO
-		return null;
+		return queue.getFirst();
 	} 
 
 	/**
@@ -52,15 +50,14 @@ public final class Queue<E> {
 	  * false otherwise
 	  */
 	public boolean isEmpty() {
-		// TODO
-		return false;
+		return queue.isEmpty();
 	}
 
 	/**
 	  * Removes all of the elements from this queue.
 	  */
 	public void clear() {
-		// TODO
+		queue.clear();
 	}
 
 	/**
@@ -69,8 +66,7 @@ public final class Queue<E> {
 	  * @return the number of elements in this queue.
 	  */
 	public int size() {
-		// TODO
-		return 0;
+		return queue.size();
 	}
 
 	/**
@@ -83,6 +79,46 @@ public final class Queue<E> {
 			list.append(String.format("[%s|", item));
 		}
 		return list.toString();
+	}
+
+	public static void main(String[] args) {
+		Queue<Integer> q = new Queue<>();
+
+		q.enqueue(1);
+		q.enqueue(2);
+		q.enqueue(3);
+		q.enqueue(4);
+
+		System.out.println(q);
+
+		System.out.println(q.deqeue());
+		System.out.println(q.deqeue());
+
+		System.out.println(q);
+		System.out.println(q.peek());
+		System.out.println(q.size());
+
+		q.clear();
+
+		System.out.println(q.peek());
+		System.out.println(q.size());
+		System.out.println(q);
+
+		q.enqueue(1);
+
+		System.out.println(q.peek());
+		System.out.println(q.size());
+		System.out.println(q);
+
+		System.out.println(q.deqeue());
+		System.out.println(q.deqeue());
+		System.out.println(q.deqeue());
+		System.out.println(q.deqeue());
+
+		System.out.println(q.peek());
+		System.out.println(q.size());
+		System.out.println(q);
+
 	}
 
 }
