@@ -6,8 +6,8 @@ import java.util.LinkedList;
 /** 
   * Searches the specified list for the specified key using the binary search algorithm. 
   *
-  * @author Clyde Bazile
-  * @since 	2017-03-20
+  * @author	Clyde Bazile
+  * @since	2017-03-20
   */
 public class BinarySearch {
 
