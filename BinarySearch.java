@@ -2,28 +2,31 @@ import java.lang.Comparable;
 import java.util.List;
 import java.util.LinkedList;
 
+
+/** 
+  * Searches the specified list for the specified key using the binary search algorithm. 
+  *
+  * @author Clyde Bazile
+  * @since 	2017-03-20
+  */
 public class BinarySearch {
-	
-	public static void main(String[] args){ 
-		List<Integer> list = new LinkedList<>();
-		
-		for(int i = 1; i <= 1234; i++) {
-			list.add(i);
-		} 
-		for(int i = 1; i <= 1234; i++) {
-			System.out.println(binarySearch(list, i));
-		} 
 
-		System.out.println(binarySearch(list, -5000));
-		System.out.println(binarySearch(list, 5000));
+	/**
+     * This class should not be instantiated.
+     */
+    private BinarySearch() { }
 
-		
-	}
-
+	/**
+	  * Searches the specified list for the specified key using the binary search algorithm.
+	  * 
+	  * @param 	list the the list to be searched
+	  * @param 	key the value to be searched for
+	  * @param 	error the error code to return if the key is not found.
+	  * @return	the index of the key or the specified error code if the key is 
+	  *			not present.
+	  */
 	public static <T extends Comparable<T>> int binarySearch( final List<? extends T> list,
-			final T key){ 
-		
-		final int NOT_FOUND = -1;
+			final T key, final Integer errorCode){ 
 
 		int low = 0;
 		int high = list.size() - 1;
@@ -40,9 +43,20 @@ public class BinarySearch {
 				return mid;
 			}
 		}
-
-		return NOT_FOUND;
+		return errorCode;
 	}
 
+	/**
+	  * Searches the specified list for the specified key using the binary search algorithm.
+	  * 
+	  * @param 	list the the list to be searched
+	  * @param 	key the value to be searched for
+	  * @return	the index of the key or {@code -1} if the key is not present.
+	  */
+	public static <T extends Comparable<T>> int binarySearch( final List<? extends T> list,
+			final T key){ 
+		
+		return binarySearch(list, key, -1);
+	}
 } 
 
