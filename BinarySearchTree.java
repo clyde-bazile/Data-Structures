@@ -7,14 +7,14 @@ import java.util.Collection;
   * @author Clyde-Bazile
   * @since 2017-03-21
   */
-public final class BinarySearchTree extends BinaryTree {
+public final class BinarySearchTree<E extends Comparable<? extends E>> extends BinaryTree<E> {
 
 	public BinarySearchTree() {
 		super();
 	}
 
-	public BinarySearchTree() {
-		super(final Collection<? extends E> c);
+	public BinarySearchTree(final Collection<? extends E> c) {
+		super(c);
 	}
 
 	/**
@@ -29,6 +29,7 @@ public final class BinarySearchTree extends BinaryTree {
 	  */
 	public E delete(final E e) {
 		// TODO
+		return null;
 	}
 
 	/**
@@ -36,6 +37,7 @@ public final class BinarySearchTree extends BinaryTree {
 	  */
 	public E minimum() {
 		// TODO
+		return null;
 	}
 
 	/**
@@ -43,6 +45,7 @@ public final class BinarySearchTree extends BinaryTree {
 	  */
 	public E maximum() {
 		// TODO
+		return null;
 	}
 
 	/**
@@ -50,6 +53,7 @@ public final class BinarySearchTree extends BinaryTree {
 	  */
 	public boolean contains(final E e) {
 		// TODO
+		return false;
 	}
 
 	/**
@@ -57,5 +61,6 @@ public final class BinarySearchTree extends BinaryTree {
 	  */
 	protected Node<E> search(final E data) {
 		// TODO
+		return null;
 	}
 }
