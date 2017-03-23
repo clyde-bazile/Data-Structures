@@ -6,12 +6,12 @@ import java.util.Collection;
   * @author Clyde-Bazile
   * @since 2017-03-20
   */
-public abstract class BinaryTree<E extends Comparable<? extends E>>{
+public abstract class BinaryTree<E extends Comparable<E>>{
 
-	protected Node<E> root = new Node<>();
+	protected Node root;
 
 	/** constructs an empty binary tree */
-	public BinaryTree(){;}
+	public BinaryTree(){ }
 
 	/** Constructs a tree contaning the elements of the specified collection
 	  * in the order they are returned by the collection's iterator.
@@ -65,19 +65,19 @@ public abstract class BinaryTree<E extends Comparable<? extends E>>{
 	  * @param data 	the data to be searched for.
 	  * @return the node containing the specified data; null otherwise.
 	  */
-	protected abstract Node<E> search(final E data);
+	protected abstract Node search(final E data);
 
 	/** Binary Node class */
-	final protected class Node<E>{
+	final protected class Node{
 		E data;
-		Node<E> left;
-		Node<E> right;
+		Node left;
+		Node right;
 
 		Node() {
 			this(null, null, null);
 		}
 
-		Node(E data, Node<E> left, Node<E> right) {
+		Node(E data, Node left, Node right) {
 			this.data = data;
 			this.left = left;
 			this.right = right;
