@@ -2,6 +2,7 @@ import java.util.Collection;
 import java.util.Random;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Arrays;
 
 /**
   * Binary Search Tree implementation that extends the abstract
@@ -75,8 +76,18 @@ public final class BSTree<E extends Comparable<E>> extends BinaryTree<E> {
 	  * {@inheritDoc}
 	  */
 	protected Node search(final E data) {
-		// TODO
-		return null;
+		return search(root, data);
+	}
+
+	private Node search(Node current, final E data) {
+		while (current != null && !current.data.equals(data)) {
+			if (data.compareTo(current.data) < 0) {
+				current = current.left;
+			} else {
+				current = current.right;
+			}
+		}		
+		return current;
 	}
 
 	public void inOrder() {
@@ -99,10 +110,16 @@ public final class BSTree<E extends Comparable<E>> extends BinaryTree<E> {
 			list.add(rm.nextInt() % 100);
 		}
 		System.out.println(list);
-		BSTree<Integer> bs = new BSTree<>(list);
-		
-		bs.inOrder();
 
+		int x = list.get(4);
+		int y = list.get(11);
+		BSTree<Integer> bs = new BSTree<>(list);
+		bs.inOrder();
+		System.out.printf("Search for: %d\n", x);
+		System.out.printf("Found: %d\n", bs.search(x).data);
+		System.out.printf("Search for: %d\n", y);
+		System.out.printf("Found: %d\n", bs.search(y).data);
+	
 		
 	}
 }
