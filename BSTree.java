@@ -52,16 +52,36 @@ public final class BSTree<E extends Comparable<E>> extends BinaryTree<E> {
 	  * {@inheritDoc}
 	  */
 	public E minimum() {
-		// TODO
-		return null;
+		Node min = minimum(root);
+		if (min == null) {
+			return null;
+		}
+		return min.data;
+	}
+
+	private Node minimum(Node current) {
+		while (current.left != null) {
+			current = current.left;
+		}
+		return current;
 	}
 
 	/**
 	  * {@inheritDoc}
 	  */
 	public E maximum() {
-		// TODO
-		return null;
+		Node max = maximum(root);
+		if (max == null) {
+			return null;
+		}
+		return max.data;
+	}
+
+	private Node maximum(Node current) {
+		while (current.right != null) {
+			current = current.right;
+		}
+		return current;
 	}
 
 	/**
@@ -76,10 +96,7 @@ public final class BSTree<E extends Comparable<E>> extends BinaryTree<E> {
 	  * {@inheritDoc}
 	  */
 	protected Node search(final E data) {
-		return search(root, data);
-	}
-
-	private Node search(Node current, final E data) {
+		Node current = root;
 		while (current != null && !current.data.equals(data)) {
 			if (data.compareTo(current.data) < 0) {
 				current = current.left;
@@ -119,7 +136,14 @@ public final class BSTree<E extends Comparable<E>> extends BinaryTree<E> {
 		System.out.printf("Found: %d\n", bs.search(x).data);
 		System.out.printf("Search for: %d\n", y);
 		System.out.printf("Found: %d\n", bs.search(y).data);
-	
+		System.out.printf("Search for: null\n");
+		System.out.printf("Found: " + bs.search(101) + "\n");
+
+		System.out.println("Search for min.");
+		System.out.printf("Found: %d\n", bs.minimum());
+		System.out.println("Search for max.");
+		System.out.printf("Found: %d\n", bs.maximum());
+
 		
 	}
 }
