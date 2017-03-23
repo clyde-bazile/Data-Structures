@@ -88,8 +88,7 @@ public final class BSTree<E extends Comparable<E>> extends BinaryTree<E> {
 	  * {@inheritDoc}
 	  */
 	public boolean contains(final E e) {
-		// TODO
-		return false;
+		return (search(e) != null);
 	}
 
 	/**
@@ -121,6 +120,8 @@ public final class BSTree<E extends Comparable<E>> extends BinaryTree<E> {
 
 	public static void main(String[] args) {
 		
+		final int OUT_OF_BOUNDS = 101;
+
 		List<Integer> list = new LinkedList<>();
 		Random rm = new Random();
 		for (int i = 0; i < 20; i++) {
@@ -137,13 +138,17 @@ public final class BSTree<E extends Comparable<E>> extends BinaryTree<E> {
 		System.out.printf("Search for: %d\n", y);
 		System.out.printf("Found: %d\n", bs.search(y).data);
 		System.out.printf("Search for: null\n");
-		System.out.printf("Found: " + bs.search(101) + "\n");
+		System.out.printf("Found: " + bs.search(OUT_OF_BOUNDS) + "\n");
 
 		System.out.println("Search for min.");
 		System.out.printf("Found: %d\n", bs.minimum());
 		System.out.println("Search for max.");
 		System.out.printf("Found: %d\n", bs.maximum());
 
+		System.out.printf("Contains: %d\n", x);
+		System.out.println(bs.contains(x));
+		System.out.printf("Contains: %d\n", OUT_OF_BOUNDS);
+		System.out.println(bs.contains(OUT_OF_BOUNDS));
 		
 	}
 }
